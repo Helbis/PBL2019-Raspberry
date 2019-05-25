@@ -15,7 +15,6 @@ def crack(kwargs):
     rainbowTable = {elem : passToHash(elem) for elem in kwargs}
     hashed = genGuess();
     # print(f"hashed = {hashed}\ntype : {type(hashed)}") # DEBUG
-    print(f"hash value : {hashed}")
 
     for word in kwargs:
         for word2 in kwargs:
@@ -24,18 +23,34 @@ def crack(kwargs):
             rainbowTable[word2 + word] = passToHash(word2 + word)
 
     compCheck = compareHashAndGuess(hashed, rainbowTable)
-    print(f"Comparision check : {compCheck}")
+    print(f"hash value : {hashed}\n")
 
+    if any(compCheck):
+        print("Match found!")
+    else:
+        print("No match found\nExiting...")
+        exit(0)
+
+    # print(f"Comparision check : {compCheck}")
+
+    i = 0
+    for key, value in rainbowTable.items():
+        if compCheck[i]:
+            print(f"==> {compCheck[i]} : {key} : {value}")
+        else:
+            print(f"{compCheck[i]} : {key} : {value}")
+        i += 1
+
+    # pprint.pprint(rainbowTable, width=1)
     # print(f"Lenght = {len(rainbowTable.keys())}") # DEBUG
-    pprint.pprint(rainbowTable, width=1)
 
 
 def main():
     parser = argparse.ArgumentParser(description="Cracking tool")
     parser.add_argument("Keywords", metavar='K', type=str, nargs='+', help="Keywords that will be used for cracking the hash")
-    args = parser.parse_args()
-    print(args)
-    # crack(args)
+    args = parser.parse_args().Keywords
+    # print(args) # DEBUG
+    crack(args)
 
 
 if __name__ == '__main__':
