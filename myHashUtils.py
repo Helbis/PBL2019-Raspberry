@@ -18,7 +18,7 @@ def compareHashAndGuess(hashed, guess):
         keys = guess.keys()
         values = guess.values()
         for word in guess.values():
-            # print(hashed, word) # DEBUG: 
+            # print(hashed, word) # DEBUG:
             if str(word) == str(hashed):
                 result.append(True)
             else:
@@ -29,4 +29,7 @@ def compareHashAndGuess(hashed, guess):
 
 
 def genGuess():
-    return "5E884898DA28047151D0E56F8DC6292773603D0D6AABBDD62A11EF721D1542D8".lower()
+    """
+    password : 5E884898DA28047151D0E56F8DC6292773603D0D6AABBDD62A11EF721D1542D8
+    """
+    return passToHash("password")
