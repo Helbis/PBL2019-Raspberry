@@ -1,22 +1,5 @@
-import hashlib
-
-
-def passToHash(password):
-    """ Those functions accept only byte arrays and output objects.
-        It is neccesary to use str.encode() to change from string to byte arrays
-        and hexdigest() to get from object to hex value."""
-    return hashlib.sha256(str.encode(password)).hexdigest()
-
-
-def compareHashAndGuess(hashed, guess):
-    if hashed == guess:
-        return True
-    else:
-        return False
-
-
-def genGuess():
-    return "5E884898DA28047151D0E56F8DC6292773603D0D6AABBDD62A11EF721D1542D8".lower()
+#!/usr/bin/env python
+from myHashUtils import *
 
 
 def main():
