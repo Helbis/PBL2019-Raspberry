@@ -1,12 +1,16 @@
 #!/usr/bin/env python
 
-from myHashUtils import *
-import pprint, argparse
+try:
+    from myHashUtils import *
+    import pprint, argparse
+except ImportError:
+    print("ImportError in " + __file__)
+    exit(1)
 
 
 def crack(kwargs):
     """
-    crack(*kwargs)
+    crack(kwargs)
     accepts any number of inputs
     and prints out hashes for combinations of them.
     Compares to the guessed hash
@@ -14,7 +18,7 @@ def crack(kwargs):
 
     rainbowTable = {elem : passToHash(elem) for elem in kwargs}
     hashed = genGuess();
-    # print(f"hashed = {hashed}\ntype : {type(hashed)}") # DEBUG
+    # print("hashed = {}\ntype : {}".format(hashed, type(hashed))) # DEBUG
 
     for word in kwargs:
         for word2 in kwargs:
@@ -23,7 +27,7 @@ def crack(kwargs):
             rainbowTable[word2 + word] = passToHash(word2 + word)
 
     compCheck = compareHashAndGuess(hashed, rainbowTable)
-    print(f"hash value : {hashed}\n")
+    print("hash value : {}\n".format(hashed))
 
     if any(compCheck):
         print("Match found!")
@@ -31,18 +35,18 @@ def crack(kwargs):
         print("No match found\nExiting...")
         exit(0)
 
-    # print(f"Comparision check : {compCheck}")
+    # print("Comparision check : {}".format(compCheck))
 
     i = 0
     for key, value in rainbowTable.items():
         if compCheck[i]:
-            print(f"==> {compCheck[i]} : {key} : {value}")
+            print("==> {} : {} : {}".format(compCheck[i], key, value))
         else:
-            print(f"{compCheck[i]} : {key} : {value}")
+            print("{} : {} : {}".format(compCheck[i], key, value))
         i += 1
 
     # pprint.pprint(rainbowTable, width=1)
-    # print(f"Lenght = {len(rainbowTable.keys())}") # DEBUG
+    # print("Lenght = {}".format(len(rainbowTable.keys()))) # DEBUG
 
 
 def main():
@@ -53,5 +57,5 @@ def main():
     crack(args)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
