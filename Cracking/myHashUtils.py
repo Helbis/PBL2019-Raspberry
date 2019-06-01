@@ -1,5 +1,9 @@
 #!/usr/bin/env python
-import hashlib
+try:
+    import hashlib
+except ImportError:
+    print("ImportError in " + __file__)
+    exit(1)
 
 
 def passToHash(password):
