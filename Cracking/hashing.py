@@ -1,5 +1,9 @@
 #!/usr/bin/env python
-from myHashUtils import *
+try:
+    from myHashUtils import *
+except ImportError:
+    print("ImportError in " + __file__)
+    exit(1)
 
 
 def main():
@@ -10,8 +14,8 @@ def main():
     guess = genGuess()
     compResult = compareHashAndGuess(hashed, guess)
 
-    pstr = f"Password : {password}\nhashed : {hashed} \
-        \nguess  : {guess}\ncompResult : {compResult}"
+    pstr = "Password : {}\nhashed : {} \
+        \nguess  : {}\ncompResult : {}".format(password, hashed, guess, compResult)
     print(pstr)
 
 
