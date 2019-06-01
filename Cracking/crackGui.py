@@ -1,10 +1,14 @@
-from tkinter import *
+try:
+    from tkinter import *
+except ImportError:
+    print("ImportError in " + "__file__")
+    exit(1)
 
 
 def getString():
     sTemp = entry.get()
     label2["text"] = sTemp
-    print(f"sTemp : {sTemp}")
+    print("sTemp : {}".format(sTemp))
 
 
 root = Tk()
