@@ -12,14 +12,14 @@ def crack(kwargs):
     """
     crack(kwargs)
     accepts any number of inputs
-    and prints out hashes for combinations of them.
+    and returns correct [key, value] pair or [None, None].
     Compares to the guessed hash
     """
 
     rainbowTable = {elem : passToHash(elem) for elem in kwargs}
     hashed = genGuess();
-    # print("hashed = {}\ntype : {}".format(hashed, type(hashed))) # DEBUG
 
+    #Scramble the words
     for word in kwargs:
         for word2 in kwargs:
             rainbowTable[word + word] = passToHash(word + word)
@@ -27,26 +27,13 @@ def crack(kwargs):
             rainbowTable[word2 + word] = passToHash(word2 + word)
 
     compCheck = compareHashAndGuess(hashed, rainbowTable)
-    print("hash value : {}\n".format(hashed))
-
-    if any(compCheck):
-        print("Match found!")
-    else:
-        print("No match found\nExiting...")
-        exit(0)
-
-    # print("Comparision check : {}".format(compCheck))
 
     i = 0
     for key, value in rainbowTable.items():
         if compCheck[i]:
-            print("==> {} : {} : {}".format(compCheck[i], key, value))
-        else:
-            print("{} : {} : {}".format(compCheck[i], key, value))
+            return [key, value]
         i += 1
-
-    # pprint.pprint(rainbowTable, width=1)
-    # print("Lenght = {}".format(len(rainbowTable.keys()))) # DEBUG
+    return [None, None]
 
 
 def main():
