@@ -1,13 +1,14 @@
 try:
     from tkinter import *
+    from crack import crack
 except ImportError:
-    print("ImportError in " + "__file__")
+    print("ImportError in " + __file__)
     exit(1)
 
 
 def getString():
     sTemp = entry.get()
-    label2["text"] = sTemp
+    label2["text"] = crack(sTemp.split(' '))
     print("sTemp : {}".format(sTemp))
 
 
